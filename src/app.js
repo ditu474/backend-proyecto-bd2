@@ -19,7 +19,7 @@ const globalErrorHandler = require('./controllers/error.controller');
 
 const app = express();
 
-if (process.env.ENVIROMENT === 'development') {
+if (process.env.ENVIRONMENT === 'development') {
   app.use(morgan('dev'));
 }
 app.use(helmet());

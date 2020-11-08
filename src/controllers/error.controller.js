@@ -42,9 +42,9 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
-  if (process.env.ENVIROMENT === 'development') {
+  if (process.env.ENVIRONMENT === 'development') {
     sendErrorDev(err, res);
-  } else if (process.env.ENVIROMENT === 'production') {
+  } else if (process.env.ENVIRONMENT === 'production') {
     let error = { ...err };
     error.message = err.message;
 
