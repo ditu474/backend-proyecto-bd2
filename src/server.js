@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = require('./app');
 
-require('./database');
+require('./config/mongodb');
 
 const port = process.env.PORT || 3050;
 const server = app.listen(port, () => console.log('Server Running'));
