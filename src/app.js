@@ -10,6 +10,7 @@ const cors = require('cors');
 
 // Routes
 const testRoutes = require('./routes/test.routes');
+const userRoutes = require('./routes/users.routes');
 
 // Utils
 const AppError = require('./utils/appError');
@@ -41,6 +42,7 @@ app.use(
 // Routes Availables
 
 app.use('/', testRoutes);
+app.use('/login', userRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`The path ${req.originalUrl} does not exist`, 404));
