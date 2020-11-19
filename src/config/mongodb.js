@@ -8,7 +8,7 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then((db) => console.log('db is connected'))
+  .then((db) => console.log('Connected To Mongo'))
   .catch((err) => console.error(err));
 
 module.exports = mongoose;

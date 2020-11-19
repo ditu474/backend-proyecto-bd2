@@ -38,6 +38,8 @@ app.use(
   })
 );
 
+// Routes Availables
+
 app.use('/', testRoutes);
 
 app.all('*', (req, res, next) => {
