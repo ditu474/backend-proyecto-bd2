@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const compression = require('compression');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 
 // Routes
 const userRoutes = require('./routes/users.routes');
@@ -21,6 +22,14 @@ const app = express();
 if (process.env.ENVIRONMENT === 'development') {
   app.use(morgan('dev'));
 }
+app.use(
+  '/',
+  rateLimit({
+    max: 200,
+    windowMs: 60 * 60 * 1000,
+    message: 'Maximo de peticiones, intenta de nuevo en una hora',
+  })
+);
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());
