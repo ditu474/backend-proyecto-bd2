@@ -86,7 +86,7 @@ userController.postFamilyInfo = catchAsync(async (req, res) => {
   } else {
     data = await FamilyInfoModel.create({
       user_email,
-      number_of_relatives: 'f',
+      number_of_relatives,
       relatives,
       number_of_childrens,
       childrens,
