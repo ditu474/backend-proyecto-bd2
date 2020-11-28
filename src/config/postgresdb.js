@@ -6,11 +6,11 @@ async function initPostgres() {
   while (!success) {
     try {
       const client = new Client({
-        user: process.env.POSTGRES_USER,
         host: process.env.POSTGRES_HOST,
-        database: process.env.POSTGRES_DB,
-        password: process.env.POSTGRES_PASSWORD,
         port: process.env.POSTGRES_PORT,
+        database: process.env.POSTGRES_DB,
+        user: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PASSWORD,
       });
       await client.connect();
       success = true;

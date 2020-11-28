@@ -13,7 +13,7 @@ const app = require('./app');
 require('./config/mongodb')();
 require('./config/postgresdb')();
 
-const port = process.env.PORT || 3050;
+const port = process.env.PORT || 8080;
 const server = app.listen(port, () => console.log('Server Running'));
 
 process.on('unhandledRejection', (err) => {
