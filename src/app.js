@@ -1,6 +1,5 @@
 // Node Packages
 const express = require('express');
-const morgan = require('morgan');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -20,6 +19,7 @@ const globalErrorHandler = require('./controllers/error.controller');
 const app = express();
 
 if (process.env.ENVIRONMENT === 'development') {
+  const morgan = require('morgan');
   app.use(morgan('dev'));
 }
 app.use(
