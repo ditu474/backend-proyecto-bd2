@@ -42,7 +42,7 @@ QRCodeController.createQRCode = async (req, res, formDocument) => {
     const { dia_entrada, email_usuario } = req.body;
     const qrDocument = await createQRDocument(formDocument.id, dia_entrada, email_usuario);
     const imagePath = `./${qrDocument.id}.png`;
-    const url = `http://localhost:3000/api/qr/info/${qrDocument.id}`;
+    const url = `http://${req.headers.host}/api/qr/info/${qrDocument.id}`;
     QRCode.toFile(
       imagePath,
       url,
@@ -59,7 +59,7 @@ QRCodeController.createQRCode = async (req, res, formDocument) => {
             message: 'No se logró crear el codigo QR',
           });
         } else {
-          updateQRDocument(res, qrDocument, imagePath, formDocument);
+          updateQRDocument(req, res, qrDocument, imagePath, formDocument);
         }
       }
     );
@@ -71,7 +71,7 @@ QRCodeController.createQRCode = async (req, res, formDocument) => {
   }
 };
 
-const updateQRDocument = (res, qrDocument, imagePath, formDocument) => {
+const updateQRDocument = (req, res, qrDocument, imagePath, formDocument) => {
   fs.readFile(imagePath, (err, data) => {
     if (err) {
       res.status(500).json({
@@ -82,7 +82,7 @@ const updateQRDocument = (res, qrDocument, imagePath, formDocument) => {
     qrDocument.save();
     res.status(201).json({
       message: 'Se ha registrado el formulario y se ha creado el codigo QR',
-      qrImage: `http://localhost:3000/api/qr/image/${qrDocument.id}`,
+      qrImage: `http://${req.headers.host}/api/qr/image/${qrDocument.id}`,
       formData: formDocument,
     });
   });
