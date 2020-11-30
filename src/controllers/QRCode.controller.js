@@ -16,21 +16,6 @@ QRCodeController.getQRImage = catchAsync(async (req, res) => {
   }
 });
 
-QRCodeController.getQRInfo = catchAsync(async (req, res) => {
-  const qrDocument = await QRModel.findById(req.params.id).select(
-    '-image -_id -id_formulario -__v'
-  );
-  if (qrDocument) {
-    res.status(200).json({
-      data: qrDocument,
-    });
-  } else {
-    res.status(404).json({
-      message: 'No se ha encontrado la informacion del codigo QR',
-    });
-  }
-});
-
 QRCodeController.createQRCode = async (req, res, formDocument) => {
   const userCanGetQR = checkIfUserCanGetQR(
     formDocument.sintoma_ultimos_dias,
@@ -42,10 +27,9 @@ QRCodeController.createQRCode = async (req, res, formDocument) => {
     const { dia_entrada, email_usuario } = req.body;
     const qrDocument = await createQRDocument(formDocument.id, dia_entrada, email_usuario);
     const imagePath = `./${qrDocument.id}.png`;
-    const url = `http://${req.headers.host}/api/qr/info/${qrDocument.id}`;
     QRCode.toFile(
       imagePath,
-      url,
+      `Correo: ${email_usuario} - Fecha de ingreso: ${qrDocument.dia_entrada}`,
       {
         color: {
           dark: '#24b03e',
