@@ -10,6 +10,7 @@ const rateLimit = require('express-rate-limit');
 // Routes
 const userRoutes = require('./routes/users.routes');
 const formRoutes = require('./routes/form.routes');
+const qrRoutes = require('./routes/qr.routes');
 
 // Utils
 const AppError = require('./utils/appError');
@@ -48,6 +49,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api/user', userRoutes);
 app.use('/api/form', formRoutes);
+app.use('/api/qr', qrRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`The path ${req.originalUrl} does not exist`, 404));

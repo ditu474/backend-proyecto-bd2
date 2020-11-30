@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const QRCodeSchema = new mongoose.Schema({
   dia_entrada: Date,
   email_usuario: String,
-  id_documento: {
+  id_formulario: {
     type: mongoose.Schema.ObjectId,
     ref: 'Form',
-    unique: true,
   },
+  image: Buffer,
 });
 
 const QRCodeModel = mongoose.model('QRCode', QRCodeSchema);
