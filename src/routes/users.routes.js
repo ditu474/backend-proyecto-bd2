@@ -1,8 +1,8 @@
-const router = require('express').Router();
-
 const userController = require('../controllers/users.controller');
 const userMiddleware = require('../middlewares/users.middleware');
 const validateResult = require('../middlewares/validationResult.middleware');
+
+const router = require('express').Router();
 
 router.get('/login', userMiddleware.login, validateResult, userController.login);
 router

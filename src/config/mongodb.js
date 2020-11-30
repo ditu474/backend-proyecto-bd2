@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const URI = 'mongodb://localhost:27017/covidpoli';
+const URI = process.env.MONGO_URL || 'mongodb://localhost:27017/covidpoli';
 
 mongoose
   .connect(URI, {

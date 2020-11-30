@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 
 // Routes
 const userRoutes = require('./routes/users.routes');
+const formRoutes = require('./routes/form.routes');
 
 // Utils
 const AppError = require('./utils/appError');
@@ -39,7 +40,14 @@ app.options('*', cors());
 app.use(express.json({ limit: '20kb' }));
 
 // Routes Availables
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'ok',
+    documentation: 'https://app.swaggerhub.com/apis-docs/ditu474/covidpoliapi/1.0.0',
+  });
+});
 app.use('/api/user', userRoutes);
+app.use('/api/form', formRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`The path ${req.originalUrl} does not exist`, 404));
